@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShowLargeImgActivity" />
+        <activity android:name=".ShowLargeImgActivity" android:theme="@style/FullScreenTheme" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -11,6 +11,8 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.zgb.plmm.db.ImgDBManager;
 import com.zgb.plmm.db.ImgGroupDBManager;
@@ -42,7 +44,10 @@ public class ShowLargeImgActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_layge_img);
         initArgs();
         initView();
