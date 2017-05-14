@@ -2,11 +2,12 @@ package com.zgb.plmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.zgb.plmm.adapter.ImgGridAdapter;
 import com.zgb.plmm.model.ImgGroup;
+import com.zgb.plmm.util.SpacesItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void itemClick(ImgGroup imgGroup, int position) {
-
+                ShowLargeImgActivity.start(MainActivity.this, imgGroup, position);
             }
         });
     }

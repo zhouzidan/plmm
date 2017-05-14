@@ -1,4 +1,4 @@
-package com.zgb.plmm;
+package com.zgb.plmm.util;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

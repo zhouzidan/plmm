@@ -1,8 +1,9 @@
 package com.zgb.plmm.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class ImgGroup {
+public class ImgGroup implements Serializable{
 	private int id ;
 	private int tagId ;
 	private String alt ;

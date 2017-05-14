@@ -3,27 +3,23 @@ package com.zgb.plmm.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.zgb.plmm.App;
 import com.zgb.plmm.model.ImgGroup;
+import com.zgb.plmm.model.ImgModel;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImgGroupDBManager {
+public class ImgDBManager {
     private SQLiteDatabase database;
 
-    private ImgGroupDBManager() {
+    private ImgDBManager() {
     }
 
-    private static ImgGroupDBManager instance;
+    private static ImgDBManager instance;
 
-    public static ImgGroupDBManager get() {
+    public static ImgDBManager get() {
         if (instance == null)
-            instance = new ImgGroupDBManager();
+            instance = new ImgDBManager();
         return instance;
     }
 
@@ -34,24 +30,23 @@ public class ImgGroupDBManager {
     }
 
 
-    public List<ImgGroup> getNeedShowImgGroup(int startIndex, int size) {
+    public List<ImgModel> getNeedShowImgModelList(ImgGroup imgGroup) {
         initDatabase();
-        List<ImgGroup> imgGroups = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * from img_group ORDER BY star DESC LIMIT ?,?", new String[]{String.valueOf(startIndex), String.valueOf(startIndex + size)});
+        List<ImgModel> imgModels = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * from img WHERE group_id = ? ;", new String[]{String.valueOf(imgGroup.getId())});
         while (cursor.moveToNext()) {
-            String first_url = cursor.getString(cursor.getColumnIndex("first_url"));
+            String url = cursor.getString(cursor.getColumnIndex("url"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             int star = cursor.getInt(cursor.getColumnIndex("star"));
-            String alt = cursor.getString(cursor.getColumnIndex("alt"));
-            ImgGroup imgGroup = new ImgGroup();
-            imgGroup.setId(id);
-            imgGroup.setFirstImgUrl(first_url);
-            imgGroup.setAlt(alt);
-            imgGroup.setStar(star);
-            imgGroups.add(imgGroup);
+            ImgModel imgModel = new ImgModel();
+            imgModel.setUrl(url);
+            imgModel.setId(id);
+            imgModel.setStar(star);
+            imgModel.setImgGroup(imgGroup);
+            imgModels.add(imgModel);
         }
         cursor.close();
-        return imgGroups;
+        return imgModels;
     }
 
 

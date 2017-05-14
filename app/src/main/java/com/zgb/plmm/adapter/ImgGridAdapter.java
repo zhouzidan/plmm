@@ -1,4 +1,4 @@
-package com.zgb.plmm;
+package com.zgb.plmm.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.zgb.plmm.R;
 import com.zgb.plmm.db.ImgGroupDBManager;
 import com.zgb.plmm.model.ImgGroup;
 
