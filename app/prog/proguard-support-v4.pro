@@ -1,0 +1,2 @@
+-keep interface android.support.v4.app.** { *; }
+-keep class android.support.v4.** { *; }
