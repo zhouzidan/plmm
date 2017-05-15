@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zgb.plmm.R;
 import com.zgb.plmm.db.ImgGroupDBManager;
 import com.zgb.plmm.model.ImgGroup;
@@ -37,7 +38,13 @@ public class ImgGridAdapter extends RecyclerView.Adapter<ImgGridAdapter.ViewHodl
     @Override
     public void onBindViewHolder(ViewHodler holder, final int position) {
         final ImgGroup imgGroup = getImgGroups(position);
-        Glide.with(mContext).load(imgGroup.getFirstImgUrl()).into(holder.imageView);
+        Glide.with(mContext)
+                .load(imgGroup.getFirstImgUrl())
+                .thumbnail(0.2f)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存图片
+                .into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
