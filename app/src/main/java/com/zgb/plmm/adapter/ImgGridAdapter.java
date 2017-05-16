@@ -1,16 +1,21 @@
 package com.zgb.plmm.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zgb.plmm.R;
 import com.zgb.plmm.db.ImgGroupDBManager;
+import com.zgb.plmm.glide.RecyclerViewPreloader;
 import com.zgb.plmm.model.ImgGroup;
 
 import java.util.List;
@@ -40,10 +45,12 @@ public class ImgGridAdapter extends RecyclerView.Adapter<ImgGridAdapter.ViewHodl
         final ImgGroup imgGroup = getImgGroups(position);
         Glide.with(mContext)
                 .load(imgGroup.getFirstImgUrl())
-                .thumbnail(0.2f)
+                .thumbnail(0.1f)
+                .centerCrop()
+                .override(344,344)
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存图片
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存图片，仅仅缓存最终的图像，即降低分辨率后的（或者是转换后的）
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
